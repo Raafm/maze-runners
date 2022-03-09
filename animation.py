@@ -188,8 +188,15 @@ def traverse_path(screen,maze,path,rect_size = 7):
 
         C+= 1
         if C == len(path):
-            return
+            executar_novamente = True
+            return executar_novamente
         
         # tempo que demora na casa (variar o tempo de acordo com o peso)
         "TALVEZ VALHA A PENA MUDAR O VALOR DOS PESOS"
-        time.sleep(0.1)
+        time.sleep(0.003*peso(maze[i][j]))
+        #if maze[i][j] == terrain[0]:
+        #   time.sleep(0.1)
+        #if maze[i][j] == terrain[1]:
+        #    time.sleep(0.4)
+        #if maze[i][j] == terrain[2]:
+        #    time.sleep(0.8)

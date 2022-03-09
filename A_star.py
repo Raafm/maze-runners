@@ -144,7 +144,7 @@ def a_star(screen,maze, source,target, end_algorithm=True,start_paused = True):
             time.sleep(0.01)
 
             path = find_path(screen,source,current,predecessor)
-            traverse_path(screen,maze,path)
+            path = traverse_path(screen,maze,path)
             
             # if path == False, user has closed window during find_path
             if path == False:
