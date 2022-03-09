@@ -25,7 +25,7 @@ def dfs(screen,maze, source,target, end_algorithm=True,start_paused = True):
 
 
     # start maze
-    display_maze(screen,maze,terrain, "Stack", rect_size = 7,animation = False)
+    display_maze(screen,maze,terrain, "Stack", "DFS",rect_size = 7,animation = False)
     for color in square_counter:
         display_counter(screen, 0 , color ,altura(color),screen_width)
 

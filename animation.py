@@ -31,7 +31,7 @@ def random_position(maze):
         # if is not an obstacle
     return i,j
 
-def display_maze(screen, maze, terrain, name_data_struct, rect_size = 7, animation = True ):
+def display_maze(screen, maze, terrain, name_data_struct, algorithm_name, rect_size = 7, animation = True ):
     ROWS = len(maze)
     COLS = len(maze[0])
 
@@ -46,9 +46,12 @@ def display_maze(screen, maze, terrain, name_data_struct, rect_size = 7, animati
     if animation: time.sleep(1)
     
     font = pygame.font.Font('freesansbold.ttf',40)
+    text = font.render(algorithm_name,True, Dark_red)                      
+    screen.blit(text,text.get_rect(center = (1100,80)))
+
+    font = pygame.font.Font('freesansbold.ttf',40)
     text = font.render("in "+ name_data_struct,True, Flame)                      
     screen.blit(text,text.get_rect(center = (1100,250)))
-
     
     font = pygame.font.Font('freesansbold.ttf',40)
     text = font.render("seen",True, Dark_yellow)                      
