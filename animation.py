@@ -6,9 +6,10 @@ from Maze.maze_diagonal_good import labirinth as maze
 def out_of_limits(i, j, i_max, j_max):
     return  i < 0 or j < 0 or i > i_max or j > j_max
 
-def draw_point(screen, color, i,j,rect_size = 8,show = False):
-    
-    pygame.draw.circle(screen ,  color  ,  (50 + rect_size//2 + rect_size*i , 50 + rect_size//2 + rect_size*j ), rect_size//3  ) 
+def draw_point(screen, color, i,j,rect_size = 8,show = False,radius = None):
+    if radius is None:
+        pygame.draw.circle(screen ,  color  ,  (50 + rect_size//2 + rect_size*i , 50 + rect_size//2 + rect_size*j ), rect_size//3  )
+    else:  pygame.draw.circle(screen ,  color  ,  (50 + rect_size//2 + rect_size*i , 50 + rect_size//2 + rect_size*j ), radius  )
     if show: pygame.display.update()
 
 
@@ -66,8 +67,9 @@ def display_counter(screen,number,color,position,screen_width= 1200):
 ROWS = len(maze)
 COLS = len(maze[0])
 rect_size = 7
+
 terrain = [
-    Black,  
+    Black,  # terrain [0], peso 1
     brown, 
     royal_blue ,
 ]
@@ -102,6 +104,9 @@ def not_obstacle(maze,i,j):
 
 def find_path(screen,source,current,predecessor):
     
+
+    path = []
+
     pause = False
     running = True
     while  running:
@@ -124,7 +129,7 @@ def find_path(screen,source,current,predecessor):
             continue
 
         time.sleep(0.01)
-        path = []
+        
 
         (x,y) = current
         path.append(current)
@@ -139,4 +144,52 @@ def find_path(screen,source,current,predecessor):
 
         if current == source:
             draw_point(screen,Green,x,y,rect_size,True)
-            return path.reverse()
+            
+            path.reverse()
+            return path
+
+
+def traverse_path(screen,maze,path,rect_size = 7):
+    
+    pos_antiga = path[0]
+    C = 1
+
+    pause = False
+    running = True
+    while  running:
+        # pygame stuff:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()                   # exit pygame,
+                running = False                          # exit() program
+                
+                executar_novamente = False
+                return executar_novamente
+
+            
+            if event.type == pygame.KEYDOWN:        
+                if event.key == pygame.K_SPACE:     # press breakspace to pause or play
+                    pause = not pause   
+                    time.sleep(0.2)
+        
+        if pause:
+            continue
+
+        i,j = path[C]
+
+        # pinta proxima posicao (desloca o agente uma casa pra "frente")
+        draw_point(screen,     White    , i  ,  j  ,  rect_size, show = True)
+        
+        # apaga posicao antiga
+        i_a , j_a  =  pos_antiga
+        draw_point(screen, maze[i_a][j_a], i_a , j_a , rect_size, show = True)
+
+        pos_antiga = i,j
+
+        C+= 1
+        if C == len(path):
+            return
+        
+        # tempo que demora na casa (variar o tempo de acordo com o peso)
+        "TALVEZ VALHA A PENA MUDAR O VALOR DOS PESOS"
+        time.sleep(0.1)
