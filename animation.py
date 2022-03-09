@@ -31,7 +31,7 @@ def random_position(maze):
         # if is not an obstacle
     return i,j
 
-def display_maze(screen, maze, terrain,rect_size = 7, animation = True, name_data_struct = "Heap"):
+def display_maze(screen, maze, terrain, name_data_struct, rect_size = 7, animation = True ):
     ROWS = len(maze)
     COLS = len(maze[0])
 

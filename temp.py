@@ -28,7 +28,7 @@ screen.fill( Black ) # background color
 
 
 # start maze
-display_maze(screen,maze,terrain,rect_size = 8,animation = False)
+display_maze(screen,maze,terrain, "Heap", rect_size = 8,animation = False)
 for color in square_counter:
     display_counter(screen, 0 , color ,altura(color),screen_width)
 

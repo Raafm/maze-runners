@@ -37,7 +37,7 @@ def gulosa(screen,maze, source,target, end_algorithm=True,start_paused = True):
 
 
     # start maze
-    display_maze(screen,maze,terrain,rect_size = 7,animation = False)
+    display_maze(screen,maze,terrain, "Heap", rect_size = 7,animation = False)
     for color in square_counter:
         display_counter(screen, 0 , color ,altura(color),screen_width)
 
