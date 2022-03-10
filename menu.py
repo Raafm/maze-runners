@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter import ttk
 from Dijkstra import dijkstra
 from Gulosa import gulosa
 from DFS import dfs
@@ -201,9 +202,10 @@ app.geometry("1000x550")
 #imagem_de_fundo = Label(app, image=img).pack()
 
 #Definindo o texto do menu
-texto_Agente = Label(app, text="Menu de Seleção de Agentes")
+texto_Agente = Label(app, fg = "black", text="MENU", font=("Helvetica", 18))
+texto_Agente.pack(ipadx=10, ipady=70)
+texto_Agente = Label(app, fg = "black", text="  Selecione o agente ", font=("Helvetica", 10))
 texto_Agente.pack()
-
 #Definindo as opções de Agentes
 lista_de_Agentes = ["Busca em Largura", "Busca em Profundidade", "Gulosa", "Dijkstra", "A*"]
 vlista = StringVar()
@@ -213,10 +215,12 @@ op_Agents = OptionMenu(app, vlista, *lista_de_Agentes)
 op_Agents.pack()
 
 #Definindo o botão de seleção
-bnt_select = Button(app, text="selecionar", command=selecionarAgente)
+bnt_select = Button(app, text="selecionar", command=selecionarAgente, font=("Arial", 16))
 bnt_select.pack()
 
-bnt_select = Button(app, text="generate random maze", command = generate_random_maze)
+texto_Agente = Label(app, text="")
+texto_Agente.pack()
+bnt_select = Button(app, text="gerar mapa", command = generate_random_maze, font=("Arial", 16))
 bnt_select.pack()
 
 
