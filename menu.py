@@ -30,7 +30,11 @@ def generate_random_maze():
     maze = random_maze(ROWS,COLS,rect_size)
 
 
+
+
 def selecionarAgente():
+    N_score = 0
+
     opcao = vlista.get()
 
     
@@ -52,7 +56,8 @@ def selecionarAgente():
             maze[ i ][ j ] = target_color
             time.sleep(0.5)
             
-            executar_novamente = bfs(None, maze, source, target, end_algorithm=True,start_paused = False,)
+            executar_novamente = bfs(None, maze, source, target, end_algorithm=True,start_paused = False,N_score = N_score)
+            N_score += 1
 
             maze[source[0]][source[1]] = temp_source  # repinta a source
             maze[target[0]][target[1]] = source_color # pinta target como novo source
@@ -83,8 +88,8 @@ def selecionarAgente():
             maze[ i ][ j ] = target_color
             time.sleep(0.5)
             
-            executar_novamente = dfs(None, maze, source, target, end_algorithm=True,start_paused = False,)
-
+            executar_novamente = dfs(None, maze, source, target, end_algorithm=True,start_paused = False,N_score = N_score)
+            N_score += 1
             maze[source[0]][source[1]] = temp_source  # repinta a source
             maze[target[0]][target[1]] = source_color # pinta target como novo source
             
@@ -114,8 +119,8 @@ def selecionarAgente():
             maze[ i ][ j ] = target_color
             time.sleep(0.5)
             
-            executar_novamente = gulosa(None, maze, source, target, end_algorithm=True,start_paused = False,)
-
+            executar_novamente = gulosa(None, maze, source, target, end_algorithm=True,start_paused = False,N_score = N_score)
+            N_score += 1
             maze[source[0]][source[1]] = temp_source  # repinta a source
             maze[target[0]][target[1]] = source_color # pinta target como novo source
             
@@ -145,8 +150,9 @@ def selecionarAgente():
             maze[ i ][ j ] = target_color
             time.sleep(0.5)
             
-            executar_novamente = dijkstra(None, maze, source, target, end_algorithm=True,start_paused = False,)
-
+            executar_novamente = dijkstra(None, maze, source, target, end_algorithm=True,start_paused = False,N_score = N_score)
+            N_score += 1
+            
             maze[source[0]][source[1]] = temp_source  # repinta a source
             maze[target[0]][target[1]] = source_color # pinta target como novo source
             
@@ -176,7 +182,8 @@ def selecionarAgente():
             maze[ i ][ j ] = target_color
             time.sleep(0.5)
             
-            executar_novamente = a_star(None, maze, source, target, end_algorithm=True,start_paused = False,)
+            executar_novamente = a_star(None, maze, source, target, end_algorithm=True,start_paused = False,N_score = N_score)
+            N_score += 1
 
             maze[source[0]][source[1]] = temp_source  # repinta a source
             maze[target[0]][target[1]] = source_color # pinta target como novo source

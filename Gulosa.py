@@ -9,8 +9,8 @@ from animation import *
 
 
 
+def gulosa(screen,maze, source,target, end_algorithm=True,start_paused = True,N_score=0):
 
-def gulosa(screen,maze, source,target, end_algorithm=True,start_paused = True):
     from math import inf as INFINITY, hypot
 
     from data_struct.priority_queue import Heap
@@ -37,7 +37,7 @@ def gulosa(screen,maze, source,target, end_algorithm=True,start_paused = True):
 
 
     # start maze
-    display_maze(screen,maze,terrain, "Heap", "Gulosa",rect_size = 7,animation = False)
+    display_maze(screen,maze,terrain, "Heap", "Gulosa",rect_size = 7,animation = False,N_score = N_score)
     for color in square_counter:
         display_counter(screen, 0 , color ,altura(color),screen_width)
 
