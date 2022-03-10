@@ -9,7 +9,7 @@ from animation import *
 
 
 
-def dijkstra(screen,maze, source,target, end_algorithm=True,start_paused = True):
+def dijkstra(screen,maze, source,target, end_algorithm=True,start_paused = True,N_score=0):
 
     # se quiser criar screen, passe ela como False
     if not screen:
@@ -27,7 +27,7 @@ def dijkstra(screen,maze, source,target, end_algorithm=True,start_paused = True)
 
 
     # start maze
-    display_maze(screen,maze,terrain, "Heap", "Dijkstra",rect_size = 7,animation = False)
+    display_maze(screen,maze,terrain, "Heap", "Dijkstra",rect_size = 7,animation = False,N_score = N_score)
     for color in square_counter:
         display_counter(screen, 0 , color ,altura(color),screen_width)
 
@@ -137,6 +137,7 @@ def dijkstra(screen,maze, source,target, end_algorithm=True,start_paused = True)
             time.sleep(0.01)
 
             path = find_path(screen,source,current,predecessor)
+            N_score += 1
             path = traverse_path(screen,maze,path)
 
             # if path == False, user has closed window during find_path

@@ -31,7 +31,29 @@ def random_position(maze):
         # if is not an obstacle
     return i,j
 
-def display_maze(screen, maze, terrain, name_data_struct, algorithm_name, rect_size = 7, animation = True ):
+def display_counter(screen,number,color,position,screen_width= 1200):
+    pygame.draw.rect(screen, color, (760 , 100+100*position , 80, 60))    # erase what was before in the prime
+    font = pygame.font.Font('freesansbold.ttf',20)
+    text = font.render(str(number) ,True, White)                      
+    screen.blit(text,text.get_rect(center = (800,135+100*position)))
+
+def display_score(screen,number,background_color = Black,screen_width= 1200,screen_height=700,show = True): 
+
+    pygame.draw.rect(screen, background_color, (1100 , 450 , 80, 60))    # erase what was before in the prime 
+    font = pygame.font.Font('freesansbold.ttf',20)
+    text = font.render(str(number) ,True, White)                      
+    screen.blit(text,text.get_rect(center = (1100 , 450 )))
+    if show: pygame.display.update()
+
+def display_maze(screen, maze, terrain, name_data_struct, algorithm_name, rect_size = 7, animation = True, N_score = 0 ):
+    
+    font = pygame.font.Font('freesansbold.ttf',30)
+    text = font.render( "score" ,True, White)
+    screen.blit(text,text.get_rect(center = (1100 , 400 )))
+
+    # score inicial == 0
+    display_score(screen,N_score,background_color = Black, show = True)
+
     ROWS = len(maze)
     COLS = len(maze[0])
 
@@ -49,22 +71,22 @@ def display_maze(screen, maze, terrain, name_data_struct, algorithm_name, rect_s
     text = font.render(algorithm_name,True, Dark_red)                      
     screen.blit(text,text.get_rect(center = (1100,80)))
 
+
+
     font = pygame.font.Font('freesansbold.ttf',40)
     text = font.render("in "+ name_data_struct,True, Flame)                      
     screen.blit(text,text.get_rect(center = (1100,250)))
-    
+    pygame.draw.circle(screen ,  Flame  ,  (1000,250), 10  )
+
     font = pygame.font.Font('freesansbold.ttf',40)
     text = font.render("seen",True, Dark_yellow)                      
-    screen.blit(text,text.get_rect(center = (1100,350)))
+    screen.blit(text,text.get_rect(center = (1100,300)))
+    pygame.draw.circle(screen ,  Dark_yellow  ,  (1000,300), 10  )
 
     pygame.display.update()
 
 
-def display_counter(screen,number,color,position,screen_width= 1200):
-    pygame.draw.rect(screen, color, (760 , 100+100*position , 80, 60))    # erase what was before in the prime 
-    font = pygame.font.Font('freesansbold.ttf',20)
-    text = font.render(str(number) ,True, White)                      
-    screen.blit(text,text.get_rect(center = (800,135+100*position)))
+
 
 
 ROWS = len(maze)
@@ -152,7 +174,7 @@ def find_path(screen,source,current,predecessor):
             return path
 
 
-def traverse_path(screen,maze,path,rect_size = 7):
+def traverse_path(screen, maze, path,  rect_size = 7):
     
     pos_antiga = path[0]
     C = 1
@@ -191,15 +213,10 @@ def traverse_path(screen,maze,path,rect_size = 7):
 
         C+= 1
         if C == len(path):
+
             executar_novamente = True
             return executar_novamente
         
         # tempo que demora na casa (variar o tempo de acordo com o peso)
         "TALVEZ VALHA A PENA MUDAR O VALOR DOS PESOS"
         time.sleep(0.003*peso(maze[i][j]))
-        #if maze[i][j] == terrain[0]:
-        #   time.sleep(0.1)
-        #if maze[i][j] == terrain[1]:
-        #    time.sleep(0.4)
-        #if maze[i][j] == terrain[2]:
-        #    time.sleep(0.8)
